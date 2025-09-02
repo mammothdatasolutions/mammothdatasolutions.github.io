@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Diagonal Split Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .left, .right {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      clip-path: polygon(0 0, 100% 0, 0 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .left {
+      background: #1e3a8a; /* deep blue */
+      z-index: 1;
+    }
+
+    .right {
+      background: #facc15; /* bright yellow */
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+      z-index: 2;
+    }
+
+    .left h1 {
+      color: #ffffff;
+    }
+
+    .right h1 {
+      color: #000000;
+    }
+
+    @media (max-width: 768px) {
+      .left, .right {
+        clip-path: none;
+        height: 50%;
+      }
+
+      .right {
+        top: 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <h1>This is the blue side</h1>
+    </div>
+    <div class="right">
+      <h1>This is the yellow side</h1>
+    </div>
+  </div>
+</body>
+</html>

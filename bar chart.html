@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Steadily Increasing Bar Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    canvas {
+      background-color: #8f968e;
+      border: 1px solid rgb(201, 145, 145);
+      max-width: 700px;
+    }
+    .Title {
+        font-style: italic;
+        font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h2 class="Title"> 
+    Growth: Number of Visitors In A Week 
+</h2>
+<canvas id="barChart" width="600" height="400"></canvas>
+
+<script>
+  const ctx = document.getElementById('barChart').getContext('2d');
+
+  // Target data we want to grow towards
+  const targetData = [10, 20, 30, 40, 50, 60, 70];
+
+  // Starting data (all 0)
+  const currentData = Array(targetData.length).fill(0);
+
+  const chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      datasets: [{
+        label: 'Visitors',
+        data: currentData,
+        backgroundColor: 'green',
+        borderColor: 'white',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      animation: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 80
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            color: 'white'
+          }
+        }
+      }
+    }
+  });
+
+  // Animate the bars increasing steadily
+  function animateGrowth() {
+    let steps = 60; // Number of animation steps
+    let currentStep = 0;
+    let interval = setInterval(() => {
+      currentStep++;
+      for (let i = 0; i < currentData.length; i++) {
+        currentData[i] = (targetData[i] * currentStep) / steps;
+      }
+      chart.update();
+      if (currentStep >= steps) {
+        clearInterval(interval);
+      }
+    }, 70); // Speed of animation (ms)
+  }
+
+  animateGrowth();
+</script>
+
+</body>
+</html>

@@ -48,6 +48,13 @@ p {
   font-size: 2.5vw;
 }
 
+/* Link to Demo */
+.Clickable-Link_Demo {
+  color: bisque;
+  font-style: italic;
+  
+}
+
 /* Link styles */
 a {
   color: #fff;
